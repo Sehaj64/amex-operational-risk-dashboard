@@ -1,6 +1,7 @@
 # 🏦 American Express GMNS | Enterprise Operational Risk & Regulatory Issues Intelligence Dashboard
 
 [![Power BI](https://img.shields.io/badge/Power_BI-Desktop-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](Enterprise_Operational_Risk_Dashboard.pbix)
+[![PDF Report](https://img.shields.io/badge/PDF_Report-Executive_View-E11D48?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](Enterprise_Operational_Risk_Dashboard_Report.pdf)
 [![DAX](https://img.shields.io/badge/DAX-Calculated_Measures-002663?style=for-the-badge)](README.md)
 [![Live Web App](https://img.shields.io/badge/Live_Web_App-Interactive-0284c7?style=for-the-badge)](index.html)
 [![Dataset](https://img.shields.io/badge/Dataset-CFPB_Federal_Log-059669?style=for-the-badge)](https://www.consumerfinance.gov/)
@@ -11,6 +12,7 @@ An enterprise-grade **Operational Risk, Issues Governance, and SLA Analytics Das
 
 ## 🚀 Live Interactive Access & Downloads
 
+- 📄 **[View / Download Executive PDF Report](Enterprise_Operational_Risk_Dashboard_Report.pdf)**
 - 📥 **[Download Working Power BI File (.pbix)](Enterprise_Operational_Risk_Dashboard.pbix)**
 - 🌐 **[Interactive Web Version (Open index.html)](index.html)**
 
