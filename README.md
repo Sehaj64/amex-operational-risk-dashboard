@@ -12,9 +12,16 @@ An enterprise-grade **Operational Risk, Issues Governance, and SLA Analytics Das
 
 ## 🚀 Live Interactive Access & Downloads
 
-- 📄 **[View / Download Executive PDF Report](Enterprise_Operational_Risk_Dashboard_Report.pdf)**
+- 📄 **[Primary Executive PDF Report](Enterprise_Operational_Risk_Dashboard_Report.pdf)**
+- 📁 **[Full PDF Reports Gallery (Multiple Filtered Views)](pdf_reports/)**
 - 📥 **[Download Working Power BI File (.pbix)](Enterprise_Operational_Risk_Dashboard.pbix)**
 - 🌐 **[Interactive Web Version (Open index.html)](index.html)**
+
+### 📑 Available PDF Executive Report Views:
+1. 📄 **[Executive Risk Summary Report (Latest View)](pdf_reports/01_Executive_Risk_Summary_Report.pdf)**
+2. 📄 **[Comprehensive KRI Governance Report (Full View)](pdf_reports/02_Comprehensive_KRI_Governance_Report.pdf)**
+3. 📄 **[Debt Collection Operational Focus Report](pdf_reports/03_Debt_Collection_Operational_Focus_Report.pdf)**
+4. 📄 **[Cross-Product State Resolution Heatmap Report](pdf_reports/04_Cross_Product_State_Resolution_Report.pdf)**
 
 ---
 
