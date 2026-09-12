@@ -114,3 +114,10 @@ This dashboard directly fulfills every key competency required in the American E
 ---
 
 *Author: Sehaj Kumar | Operational Risk & Analytics Portfolio*
+
+
+## Dashboard screenshot gallery
+
+[View six original Power BI screenshots with filter context and development notes](screenshots/README.md).
+
+![Money transfer complaints, untimely responses selected](screenshots/2026-09-12-205446.png)
