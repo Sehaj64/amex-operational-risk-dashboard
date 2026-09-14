@@ -1,123 +1,61 @@
-# 🏦 American Express GMNS | Enterprise Operational Risk & Regulatory Issues Intelligence Dashboard
+# Consumer Complaints and Operational Risk Analytics
 
-[![Power BI](https://img.shields.io/badge/Power_BI-Desktop-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](Enterprise_Operational_Risk_Dashboard.pbix)
-[![PDF Report](https://img.shields.io/badge/PDF_Report-Executive_View-E11D48?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](Enterprise_Operational_Risk_Dashboard_Report.pdf)
-[![DAX](https://img.shields.io/badge/DAX-Calculated_Measures-002663?style=for-the-badge)](README.md)
-[![Live Web App](https://img.shields.io/badge/Live_Web_App-Interactive-0284c7?style=for-the-badge)](index.html)
-[![Dataset](https://img.shields.io/badge/Dataset-CFPB_Federal_Log-059669?style=for-the-badge)](https://www.consumerfinance.gov/)
+An independent Power BI portfolio project using public CFPB consumer complaints data. The dashboard uses an Amex-themed presentation; it is not an internal American Express system or evidence of employment with the company.
 
-An enterprise-grade **Operational Risk, Issues Governance, and SLA Analytics Dashboard** tailored specifically to the **American Express Global Merchant & Network Services (GMNS) - Global Governance, Risk, Remediation & Operations (GRRO)** team.
+## Latest dashboard
 
----
+![Power BI dashboard showing Midwest credit-reporting complaints](screenshots/2026-09-13-143932.png)
 
-## 🚀 Live Interactive Access & Downloads
+[Download the updated Power BI workbook](Enterprise_Operational_Risk_Dashboard.pbix) · [Open the full-size screenshot](screenshots/2026-09-13-143932.png) · [DAX definitions](docs/dax-measures.md) · [Screenshot history](screenshots/README.md)
 
-- 📄 **[Primary Executive PDF Report](Enterprise_Operational_Risk_Dashboard_Report.pdf)**
-- 📁 **[Full PDF Reports Gallery (Multiple Filtered Views)](pdf_reports/)**
-- 📥 **[Download Working Power BI File (.pbix)](Enterprise_Operational_Risk_Dashboard.pbix)**
-- 🌐 **[Interactive Web Version (Open index.html)](index.html)**
+Updated September 14, 2026 with the saved September 13 workbook and screenshot. The screenshot filters **Credit reporting, credit repair services, or other personal consumer reports** to the **Midwest** region.
 
-### 📑 Available PDF Executive Report Views:
-1. 📄 **[Executive Risk Summary Report (Latest View)](pdf_reports/01_Executive_Risk_Summary_Report.pdf)**
-2. 📄 **[Comprehensive KRI Governance Report (Full View)](pdf_reports/02_Comprehensive_KRI_Governance_Report.pdf)**
-3. 📄 **[Debt Collection Operational Focus Report](pdf_reports/03_Debt_Collection_Operational_Focus_Report.pdf)**
-4. 📄 **[Cross-Product State Resolution Heatmap Report](pdf_reports/04_Cross_Product_State_Resolution_Report.pdf)**
+| Metric in this filtered view | Value |
+|---|---:|
+| Complaints | 804 |
+| Untimely responses | 42 |
+| Untimely response rate | 5.22% |
+| Complaints closed with monetary relief | 30 |
 
----
+The three counts above were independently reconciled against the saved model; 42 / 804 rounds to 5.22%. These are filtered results, not totals for the full dataset.
 
-## 🎯 Executive Summary & Business Context
+## Business question and findings
 
-In enterprise payment networks and merchant acquiring, operational breakdowns—such as settlement clearing batch delays, partner acquirer API timeouts, merchant onboarding KYC bottlenecks, and disputed chargeback queues—create direct regulatory scrutiny and operational loss exposure.
+Where are complaints concentrated, how often are responses untimely, and which issue categories warrant further investigation?
 
-This project ingests **62,516 real-world banking and payment records** from the U.S. Consumer Financial Protection Bureau (CFPB) regulatory database, transforming complex operational records into self-service C-Suite Key Risk Indicators (KRIs), root cause thematic analysis, and geographic remediation tracking.
+The complete dataset contains **62,516 unique complaints across nine product categories**, including **2,403 untimely responses**. Within 2,736 debt-collection complaints, attempts to collect debt not owed (1,351) and written notification about debt (487) together account for **67.18%**. This concentration provides a starting point for document and process review; it does not establish root causes or quantify savings from a proposed fix.
 
----
+## Data preparation and modeling
 
-## 📊 Core Key Risk Indicators (KRIs)
+- Loaded public complaint CSV data with Power Query, promoted headers and assigned date, numeric and text types.
+- Connected the complaint fact table to calendar and geography dimensions for date and regional analysis.
+- Built interactive product and region filters, KPI cards, issue distributions, state-level outcome summaries and submission-channel views.
+- Organized measures into folders for core KPIs, time intelligence, formatting and advanced analysis.
 
-| Key Risk Indicator | Filtered Value | Target SLA | Business Meaning |
-| :--- | :---: | :---: | :--- |
-| **Total Filtered Issues** | **3,000** | — | Total operational friction volume in selected business segment |
-| **SLA Timeliness Breaches** | **173** | 0 | Cases exceeding mandated regulatory response timeframe |
-| **SLA Breach Rate %** | **6.88%** | **< 5.00%** | Key risk compliance threshold metric (breach alert) |
-| **Monetary Customer Remediation** | **100** | Minimize | Cases requiring direct monetary compensation / financial loss |
+## DAX and reporting
 
----
+The saved model contains 14 measures, including legacy and newer KPI definitions. Calculations cover complaint counts, response timeliness, monetary relief, prior-month totals, month-over-month growth, a 30-day average of daily breach rates, Top 5 issues and conditional alert colors. Functions include `CALCULATE`, `KEEPFILTERS`, `DATEADD`, `AVERAGEX`, `DATESINPERIOD`, `TOPN`, `ALLSELECTED` and `SWITCH`.
 
-## 🛠️ Production DAX Measure Library
+See the [complete saved DAX definitions and validation notes](docs/dax-measures.md). Some supporting measures are in the model but are not visible in the screenshot.
 
-### 1. Total Issues
-```dax
-Total Issues = COUNTROWS('Real_CFPB_Consumer_Complaints')
-```
+## Row-level security configuration
 
-### 2. SLA Timeliness Breaches (Untimely Responses)
-```dax
-SLA Breaches = 
-CALCULATE(
-    COUNTROWS('Real_CFPB_Consumer_Complaints'), 
-    'Real_CFPB_Consumer_Complaints'[Timely response?] = "No"
-)
-```
+- `Product_Compliance_Lead_Cards`: restricts the complaint table to Credit card, Credit card or prepaid card, and Prepaid card.
+- `Regional_Risk_Lead_West`: restricts the complaint table to CA, WA, OR, NV and AZ. This is a five-state scope; it is narrower than the geography table's West region.
 
-### 3. SLA Breach Rate %
-```dax
-SLA Breach Rate % = 
-DIVIDE([SLA Breaches], [Total Issues], 0)
-```
+These are configured static roles. Power BI View As and service-level security testing have not been documented. The report's region slicer is separate from RLS.
 
-### 4. Monetary Remediation Count (Direct Customer Loss Compensation)
-```dax
-Monetary Remediation Count = 
-CALCULATE(
-    COUNTROWS('Real_CFPB_Consumer_Complaints'), 
-    'Real_CFPB_Consumer_Complaints'[Company response to consumer] = "Closed with monetary relief"
-)
-```
+## Review and reproduce
 
----
+1. Download the PBIX and open it in Power BI Desktop to inspect the saved report and model.
+2. For a data refresh, replace the original local CSV path in Power Query with your local copy of the source data. The source schema and types are visible in the query.
+3. Select the credit-reporting product and Midwest region to compare against the latest screenshot.
+4. Review measure definitions and validate any changes before reusing outputs.
 
-## 🔍 Key Risk Insights & Root Cause Investigations
+Source: [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/). Complaint records describe reported issues and company responses; they are not verified fraud events or transaction-level loss records. “SLA breach” in the report means the source field `Timely response?` is No. Color thresholds are project assumptions, not legal or regulatory benchmarks.
 
-### 1. Pareto Root Cause Concentration (The 80/20 Rule)
-- In the Debt Collection & Disputed Settlement portfolio, **"Attempts to collect debt not owed"** constitutes **1,218 issues (over 50% of the entire portfolio)**.
-- Second highest driver: **"Written notification about debt"** with **459 issues**.
-- **Actionable Insight**: Automating the pre-collection validation pipeline directly mitigates >60% of all customer escalations.
+## Earlier versions
 
-### 2. Digital Channel Vulnerability
-- **89.26%** of all complaints originate through **Web Portals**, demonstrating that digital UI latency and self-service exceptions drive the majority of consumer dissatisfaction.
+[Earlier web dashboard](https://sehaj64.github.io/amex-operational-risk-dashboard/) · [Earlier PDF report views](pdf_reports/) · [Original screenshot gallery](screenshots/README.md)
 
-### 3. Geographic Resolution & Settlement Hotspots
-- **California** (338 closed with explanation, 23 monetary relief) and **Florida** (250 closed with explanation, 11 monetary relief) represent the highest density of financial remediation exposure.
-
----
-
-## 📂 Repository File Structure
-
-```
-amex-operational-risk-dashboard/
-├── Enterprise_Operational_Risk_Dashboard.pbix   # Primary Power BI Desktop file (Data model + visuals)
-├── index.html                                   # Self-contained, interactive web dashboard replica
-└── README.md                                    # Executive report, DAX dictionary & documentation
-```
-
----
-
-## 💼 Role Alignment: American Express GMNS Risk Reporting & Analytics
-
-This dashboard directly fulfills every key competency required in the American Express GMNS Risk Analyst specification:
-- **Issues, OREs & Remediation Analytics**: Quantifies operational issues and remediation velocity.
-- **Root Cause & Trend Investigations**: Leverages Pareto sorting to isolate high-risk drivers.
-- **Executive-Ready Storytelling**: Formatted for C-Suite risk committees and regulatory compliance oversight.
-- **Self-Service Analytics**: Dynamic interactive slicing across products, states, and SLA adherence flags.
-
----
-
-*Author: Sehaj Kumar | Operational Risk & Analytics Portfolio*
-
-
-## Dashboard screenshot gallery
-
-[View six original Power BI screenshots with filter context and development notes](screenshots/README.md).
-
-![Money transfer complaints, untimely responses selected](screenshots/2026-09-12-205446.png)
+The web dashboard and PDFs are earlier presentation versions. They do not reproduce the updated PBIX model, RLS or latest filter state. Refer to the latest screenshot and PBIX for current portfolio evidence.
