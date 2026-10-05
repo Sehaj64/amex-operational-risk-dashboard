@@ -4,7 +4,21 @@ Original user-supplied screenshots of an Amex-themed portfolio dashboard using p
 
 These are filtered snapshots, not refreshed reporting. The September 12 screenshots select untimely responses, so the displayed 100% breach rate is conditional on that selection. September 10 captures are development history; the last screenshot includes a monetary-count percentage formatting error and should not be treated as a final KPI presentation.
 
-## Latest view — Midwest credit-reporting complaints
+## New user-supplied views — added October 5, 2026
+
+### Midwest / credit reporting
+
+![Midwest credit-reporting view](2026-10-05-midwest.png)
+
+804 complaints, 42 untimely responses (5.22%), and 30 monetary-relief outcomes.
+
+### South / credit reporting
+
+![South credit-reporting view](2026-10-05-south.png)
+
+Displayed volume: 3K (rounded); 153 untimely responses (4.89%); 115 monetary-relief outcomes. These are screenshot observations, not newly reconciled model totals. The visible selection handles are from Power BI editing mode.
+
+## Previous latest view — Midwest credit-reporting complaints
 
 September 13, 2026: 804 complaints, 42 untimely responses (5.22%) and 30 monetary-relief outcomes. Counts reconciled against the updated saved PBIX. Product and region slicers determine this view; it is not evidence of an RLS test.
 

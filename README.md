@@ -4,7 +4,13 @@ An independent Power BI portfolio project using public CFPB consumer complaints 
 
 ## Latest dashboard
 
-![Power BI dashboard showing Midwest credit-reporting complaints](screenshots/2026-09-13-143932.png)
+![Power BI dashboard showing Midwest credit-reporting complaints](screenshots/2026-10-05-midwest.png)
+
+### South credit-reporting view
+
+![Power BI dashboard showing South credit-reporting complaints](screenshots/2026-10-05-south.png)
+
+The supplied South screenshot shows 153 untimely responses, a displayed rate of 4.89% and 115 monetary-relief outcomes. Complaint volume is rounded to 3K in the screenshot; no exact count is inferred. The captures show different region filters, not a before/after performance improvement.
 
 [Download the updated Power BI workbook](Enterprise_Operational_Risk_Dashboard.pbix) · [Open the full-size screenshot](screenshots/2026-09-13-143932.png) · [DAX definitions](docs/dax-measures.md) · [Screenshot history](screenshots/README.md)
 
